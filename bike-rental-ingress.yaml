@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bike-rental-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bike-rental.nguyen
+      http:
+        paths:
+          - path: /user-ws
+            pathType: Prefix
+            backend:
+              service:
+                name: user-ws-service
+                port:
+                  number: 8080
+          - path: /bike-ws
+            pathType: Prefix
+            backend:
+              service:
+                name: bike-rental-service
+                port:
+                  number: 8080
